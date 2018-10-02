@@ -14,10 +14,6 @@ const API_KEY = 'AIzaSyCHDWjaucwGUt44uWXqTEUgRO8dkFAZ0yg';
     thumbnail: 'https://img.youtube.com/some/thumbnail.jpg'
   }
 */
-const store = {
-  videos: []
-};
-
 // TASK: Add the Youtube Search API Base URL here:
 // Documentation is here: https://developers.google.com/youtube/v3/docs/search/list#usage
 const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
@@ -107,9 +103,11 @@ const generateVideoItemHtml = function(video) {
 // TASK:
 // 1. Set the received array as the value held in store.videos
 // TEST IT!
+/*
 const addVideosToStore = function(videos) {
   store.videos = videos;
 };
+*/
 
 
 /**
@@ -121,7 +119,7 @@ const addVideosToStore = function(videos) {
 // 2. Add this array of DOM elements to the appropriate DOM element
 // TEST IT!
 const render = function() {
-  const html = store.videos.map(video => generateVideoItemHtml(video));
+  const html = Store.videos.map(video => generateVideoItemHtml(video));
   $('.results').html(html);
 };
 
@@ -148,7 +146,7 @@ const handleFormSubmit = function() {
     $('#search-term').val('');
     fetchVideos(searchTerm, response => {
       const decoratedResponse = decorateResponse(response);
-      addVideosToStore(decoratedResponse);
+      Store.setVideos(decoratedResponse);
       render();
     });
 
