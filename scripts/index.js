@@ -16,11 +16,8 @@ const API_KEY = 'AIzaSyCHDWjaucwGUt44uWXqTEUgRO8dkFAZ0yg';
 */
 const store = {
   videos: [
-    {
-      id: '',
-      title: '',
-      thumbnail: '',
-    }
+   
+    
   ]
 };
 
@@ -59,7 +56,7 @@ const callBack = function(data) {
   console.log(data);
 };
 
-fetchVideos('test', callBack);
+
 /**
  * @function decorateResponse
  * Uses Youtube API response to create an array of "decorated" video objects as 
@@ -76,8 +73,17 @@ fetchVideos('test', callBack);
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
 const decorateResponse = function(response) {
-
+  return response.items.map(item => {
+    return {
+    id: item.id.videoId,
+    title: item.snippet.title,
+    thumbnail: item.snippet.thumbnails.medium.url
+    
+  }
+});
 };
+
+fetchVideos('test', decorateResponse);
 
 /**
  * @function generateVideoItemHtml
